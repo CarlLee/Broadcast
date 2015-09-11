@@ -1,0 +1,112 @@
+<head>
+  <title>broadcasts</title>
+</head>
+
+<body>
+	<div class="header">
+		<div class="wrapper">
+		<div class="btns">
+			{{#if user}}
+				<button class="primary" id="new-post">New Post</button>
+			{{/if}}
+		</div>
+		{{> loginButtons}}
+		</div>
+	</div>
+	<div class="new-post-box-wrapper">
+		<div class="new-post-box">
+			<form id="new-post-form">
+				<div class="row clearfix">
+					<label for="title" class="label">Title</label>
+					<input placeholder="Enter title here" id="title" name="title" class="title" type="text">
+				</div>
+				<div class="contents clearfix">
+					<label for="content" class="label">Content</label>
+					<textarea placeholder="Enter content here, leave it blank if you don't have anything to say" id="content" name="content" class="content"></textarea>
+				</div>
+				<div class="buttons">
+					<button id="send-new-post" class="primary">Post</button><button id="cancel-new-post" class="warning">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="body">
+	{{#each broadcasts}}
+	  {{> broadcast}}
+	{{/each}}
+	</div>
+</body>
+
+<template name="broadcast">
+	<div class="broadcast clearfix">
+		<div class="broadcast-content">
+			<div class="user-info">
+				<div class="avatar-wrapper">
+					<img src="{{ owner.profile.avatar }}" alt="" class="avatar">
+				</div>
+			</div>
+			<div class="info">
+				<div class="title">
+					<span>{{ title }}</span>
+					<span class="sub-text">
+						<a id="upvote" href="#" class="votes">&#9650;</a>
+						<a id="downvote" href="#" class="votes">&#9660;</a>
+						<span>{{ votes }} votes</span>
+					</span>
+				</div>
+				<div class="etc sub-text">
+					<span>by <a class="owner" href="#">{{ owner.profile.nickname }}</a></span>
+					<span>from {{ owner.profile.location }}, {{ ago created }}</span>
+				</div>
+			</div>
+			<div class="details{{#unless expanded}} hidden{{/unless}}">{{ content }}</div>
+			<div class="replies_count{{#unless newUnread}} disabled{{/unless}}">{{ replies.count }}</div>
+		</div>
+		{{#if replies}}
+		<div class="replies{{#unless expanded}} hidden{{/unless}}">
+			{{#each replies}}
+	  			{{> reply}}
+			{{/each}}
+			<div class="reply clearfix">
+				<div class="user-info">
+					<div class="avatar-wrapper">
+						<img src="{{ myself.profile.avatar }}" alt="" class="avatar">
+					</div>
+				</div>
+				<div class="reply-details">
+					<div class="reply-etc sub-text">
+						<a class="owner" href="#">{{ myself.profile.nickname }}</a> from {{ myself.profile.location }}
+					</div>
+
+					<form id="reply-form">
+						<div class="wrapper">
+							<textarea placeholder="Reply to {{owner.profile.nickname}} here" class="reply-content" name="content" id="reply-content"></textarea>
+						</div>
+						<div class="buttons">
+							<button class="primary">Reply</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+	</div>
+</template>
+<template name="reply">
+	<div class="reply clearfix">
+		<div class="user-info">
+			<div class="avatar-wrapper">
+				<img src="{{ owner.profile.avatar }}" alt="" class="avatar">
+			</div>
+		</div>
+		<div class="reply-details">
+			<div class="reply-etc sub-text">
+				<a class="owner" href="#">{{ owner.profile.nickname }}</a> from {{ owner.profile.location }}, {{ ago created }}
+				<a href="#" id="upvote" class="votes">&#9650;</a>
+				<a href="#" id="downvote" class="votes">&#9660;</a>
+				<span>{{ votes }} votes</span>
+			</div>
+			<div class="content">{{ content }}</div>
+		</div>
+	</div>
+</template>
