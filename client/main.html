@@ -5,15 +5,15 @@
 <body>
 	<div class="header">
 		<div class="wrapper">
-		<div class="btns">
-			{{#if user}}
-				<button class="primary" id="new-post">New Post</button>
-			{{/if}}
-		</div>
-		{{> loginButtons}}
+			<div class="btns">
+				{{#if user}}
+					<button class="primary" id="new-post">New Post</button>
+				{{/if}}
+			</div>
+			{{> loginButtons}}
 		</div>
 	</div>
-	<div class="new-post-box-wrapper">
+	<!-- <div class="new-post-box-wrapper">
 		<div class="new-post-box">
 			<form id="new-post-form">
 				<div class="row clearfix">
@@ -29,14 +29,42 @@
 				</div>
 			</form>
 		</div>
-	</div>
+	</div> -->
 	<div class="body">
-	{{#each broadcasts}}
+	<!-- {{#each broadcasts}}
 	  {{> broadcast}}
-	{{/each}}
+	{{/each}} -->
 	</div>
 </body>
+<!-- 
+			{{#if replies}}
+			<div class="replies{{#unless expanded}} hidden{{/unless}}">
+				{{#each replies}}
+		  			{{> reply}}
+				{{/each}}
+				<div class="reply clearfix">
+					<div class="user-info">
+						<div class="avatar-wrapper">
+							<img src="{{ myself.profile.avatar }}" alt="" class="avatar">
+						</div>
+					</div>
+					<div class="reply-details">
+						<div class="reply-etc sub-text">
+							<a class="owner" href="#">{{ myself.profile.nickname }}</a> from {{ myself.profile.location }}
+						</div>
 
+						<form id="reply-form">
+							<div class="wrapper">
+								<textarea placeholder="Reply to {{owner.profile.nickname}} here" class="reply-content" name="content" id="reply-content"></textarea>
+							</div>
+							<div class="buttons">
+								<button class="primary">Reply</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			{{/if}}
 <template name="broadcast">
 	<div class="broadcast clearfix">
 		<div class="broadcast-content">
@@ -109,4 +137,4 @@
 			<div class="content">{{ content }}</div>
 		</div>
 	</div>
-</template>
+</template> -->
